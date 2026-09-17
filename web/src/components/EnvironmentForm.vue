@@ -337,14 +337,16 @@
                 </td>
 
                 <td class="pa-1">
-                  <v-text-field
+                  <v-textarea
                     solo-inverted
                     flat
                     hide-details
+                    auto-grow
+                    rows="1"
                     v-model="props.item.value"
                     placeholder="*******"
                     class="v-text-field--solo--no-min-height"
-                  ></v-text-field>
+                  ></v-textarea>
                 </td>
 
                 <td style="width: 38px">
