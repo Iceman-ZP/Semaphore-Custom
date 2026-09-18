@@ -1,3 +1,21 @@
+# Semaphore Custom
+
+> Community-maintained custom build based on [Semaphore UI](https://github.com/semaphoreui/semaphore) v2.19.7.
+> This repository is not the official Semaphore UI repository.
+
+This build adds:
+
+- reliable Ansible Variable Group secret transport through JSON `--extra-vars`;
+- correct handling of values containing spaces and special characters;
+- multiline variable support for SSH/SFTP private keys and similar data;
+- compact multiline fields in the Variable Group UI.
+
+Current custom release: **v2.19.7-custom.1**
+
+See [CUSTOM_BUILD.md](CUSTOM_BUILD.md) for technical details, build instructions, deployment, and upstream information.
+
+---
+
 # Semaphore UI
 
 Modern UI for Ansible, Terraform/OpenTofu/Terragrunt, PowerShell and other DevOps tools.
