@@ -1,0 +1,33 @@
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine3.24 AS builder
+
+RUN apk add --no-cache -U \
+    libc-dev curl nodejs npm git gcc zip unzip tar
+
+WORKDIR /usr/local
+RUN curl -sL https://taskfile.dev/install.sh | sh
+
+WORKDIR /go/src/semaphore
+COPY . .
+
+RUN --mount=type=cache,target=/go/pkg \
+    go mod download
+
+ARG TARGETOS
+ARG TARGETARCH
+
+RUN --mount=type=cache,target=/go/pkg \
+    --mount=type=cache,target=/root/.cache/go-build \
+    task deps && \
+    task build GOOS=${TARGETOS} GOARCH=${TARGETARCH}
+
+FROM semaphoreui/semaphore:v2.19.7@sha256:8886d55da349f6d600f66f2c6dd2be01a3a5b4265542b04cb6c10ae47e4306d2
+
+USER root
+
+COPY --from=builder --chown=1001:0 \
+    /go/src/semaphore/bin/semaphore \
+    /usr/local/bin/semaphore
+
+RUN chmod 0755 /usr/local/bin/semaphore
+
+USER 1001
