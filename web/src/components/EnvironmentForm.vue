@@ -341,8 +341,8 @@
                     solo-inverted
                     flat
                     hide-details
-                    auto-grow
                     rows="1"
+                    no-resize
                     v-model="props.item.value"
                     placeholder="*******"
                     class="v-text-field--solo--no-min-height"
